@@ -1,12 +1,10 @@
-<html>
-    <head>
-        
-    </head>
-    <body>
+{% extends 'base.html' %} 
+
+{% block content %}
+<h2>Recipes</h2>
         {% for recipe in recipes %}
             {{recipe.recipe_name}}
-            {{image.image_file}}
             {{recipe.user_name}}
         {% endfor %}
-    </body>
-</html>
+   
+{% endblock %}
