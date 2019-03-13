@@ -4,7 +4,10 @@
 <h2>Recipes</h2>
         {% for recipe in recipes %}
             {{recipe.recipe_name}}
+            {{recipe.brief_description}}
             {{recipe.user_name}}
         {% endfor %}
    
+  
+  
 {% endblock %}
