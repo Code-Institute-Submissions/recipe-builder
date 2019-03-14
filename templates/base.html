@@ -8,6 +8,9 @@
 
     <!--Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    
+    <!--Font Awesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   
     <!--Materialise CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
@@ -22,12 +25,12 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="sass.html">Home</a></li>
-                <li><a href="addrecipe.html">Create Recipes</a></li>
+                <li><a href="{{url_for('add_recipe')}}">Create Recipes</a></li>
                 <li><a href="collapsible.html">Search Recipes</a></li>
             </ul>
             <ul class="side-nav" id="mobile-demo">
                 <li><a href="sass.html">Home</a></li>
-                <li><a href="addrecipe.html">Create Recipes</a></li>
+                <li><a href="{{url_for('add_recipe')}}">Create Recipes</a></li>
                 <li><a href="collapsible.html">Search Recipes</a></li>
             </ul>
         </div>
@@ -48,7 +51,21 @@
         $(document).ready(function() {
             $(".button-collapse").sideNav();
            $('.collapsible').collapsible();
+           $('select').material_select();
         })
+        
+        $('.timepicker').pickatime({
+    default: '00:00', // Set default time: 'now', '1:30AM', '16:30'
+    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+    twelvehour: false, // Use AM/PM or 24-hour format
+    donetext: 'OK', // text for done-button
+    cleartext: 'Clear', // text for clear-button
+    canceltext: 'Cancel', // Text for cancel-button,
+    container: undefined, // ex. 'body' will append picker to body
+    autoclose: false, // automatic close timepicker
+    ampmclickable: false, // make AM PM clickable
+    aftershow: function(){} //Function for after opening timepicker
+  });
     </script>
 </body>
 

@@ -1,0 +1,81 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>Add Your Recipe</h3>
+
+<div class="row">
+  <form action="" method="POST" class="col s12">
+    <!--Recipe Title-->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">restaurant</i>
+        <input id="recipe_name" name="recipe_name" type="text" class="validate">
+        <label for="icon_prefix">Title</label>
+      </div>
+    </div>
+    <!--Cuisine-->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">subject</i>
+        <input id="cusisine_name" name="cusisine_name" type="tel" class="validate">
+        <label for="icon_telephone">Cuisine</label>
+      </div>
+    </div>
+    <!--Catergories-->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">poll</i>
+        <select id="category" name="category_name">
+          <option value="" disabled selected>Choose category</option>
+          {% for cat in categories %}
+          <option value="{{cat.category_name}}">{{cat.category_name}}</option>
+          {% endfor %}
+        </select>
+        <label>Category</label>
+      </div>
+    </div>
+    <!--Allergens-->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">priority_high</i>
+        <select id="allergen" name="allergen_name">
+          <option value="" disabled selected>Choose allergen</option>
+          {% for allergy in allergens %}
+          <option value="{{allergy.allergen_name}}">{{allergy.allergen_name}}</option>
+          {% endfor %}
+        </select>
+        <label>Allergens</label>
+      </div>
+    </div>
+    <!--Preparation Time-->
+    <div class="row">
+      <div class="input-field col s6">
+        <i class="material-icons prefix">schedule</i>
+        <input type="text" class="timepicker">
+        <label for="icon_prefix">Preparation Time</label>
+      </div>
+    <!--Cooking Time-->
+      <div class="input-field col s6">
+        <i class="material-icons prefix">schedule</i>
+        <input type="text" class="timepicker">
+        <label for="icon_prefix">Cooking Time</label>
+      </div>
+    </div> 
+    <!--Serves-->
+    <div class="row">
+      <div class="input-field col s12">
+        <i class="material-icons prefix">poll</i>
+        <select id="serves" name="amount_serves">
+          <option value="" disabled selected>Choose how many the recipe serves</option>
+          {% for num in serves %}
+          <option value="{{num.amount_serves}}">{{num.amount_serves}}</option>
+          {% endfor %}
+        </select>
+        <label>Serves</label>
+      </div>
+    </div>
+  </form>
+</div>
+<a class="waves-effect waves-light btn" href="{{url_for('get_recipes')}}"><i class="material-icons left">arrow_back</i>Back</a>
+<a class="waves-effect waves-light btn" href=""><i class="material-icons right">arrow_forward</i>Next</a>
+
+{% endblock %}

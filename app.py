@@ -14,10 +14,14 @@ mongo = PyMongo(app)
 @app.route('/get_recipes')
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.recipes.find())
+
     
 @app.route('/add_recipe')
 def add_recipe():
-    return render_template("addrecipe.html")
+    return render_template('addrecipe.html', 
+                            categories=mongo.db.category.find(),
+                            allergens=mongo.db.allergen.find(),
+                            serves=mongo.db.serves.find())
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
