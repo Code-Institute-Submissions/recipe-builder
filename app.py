@@ -29,7 +29,9 @@ def add_ingredient():
                             measurements=mongo.db.measurements.find(),
                             preparation=mongo.db.preparation.find())
                             
-          
+@app.route('/add_method')
+def add_method():
+    return render_template('method.html')            
 
     
 if __name__ == '__main__':
