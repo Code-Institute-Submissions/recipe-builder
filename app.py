@@ -23,7 +23,13 @@ def add_recipe():
                             allergens=mongo.db.allergen.find(),
                             serves=mongo.db.serves.find())
                             
-            
+@app.route('/add_ingredient')
+def add_ingredient():
+    return render_template('addingredients.html',
+                            measurements=mongo.db.measurements.find(),
+                            preparation=mongo.db.preparation.find())
+                            
+          
 
     
 if __name__ == '__main__':
