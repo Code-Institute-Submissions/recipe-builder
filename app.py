@@ -23,11 +23,40 @@ def add_recipe():
                             allergens=mongo.db.allergen.find(),
                             serves=mongo.db.serves.find())
                             
+@app.route('/insert_recipe', methods=['POST'])
+def insert_recipe():
+    recipes=mongo.db.recipes
+    recipes.insert_one({
+        'recipe_name':request.form['recipe_name'],
+        'brief_description':request.form['brief_description'],
+        'category':request.form['category_name'],
+        'allergen':request.form['allergen_name'],
+        'prep-time':request.form['prep_time'],
+        'cook_time':request.form['cook_time'],
+        'amount_serves':request.form['amount_serves']
+    })
+    return redirect(url_for('thank_you'))
+
+@app.route('thank_you')
+def thank_you():
+    return redirect(url_for('thank_you.html'))
+                            
 @app.route('/add_ingredient')
 def add_ingredient():
     return render_template('addingredients.html',
                             measurements=mongo.db.measurements.find(),
                             preparation=mongo.db.preparation.find())
+                            
+@app.route('/insert_ingredient', methods=['POST'])
+def insert_ingredient():
+    ingredient=mongo.db.ingredients
+    ingredient.insert_one({
+        'ingredient_name':request.form['ingredient_name'],
+        'amount':request.form['amount'],
+        'measure_type':request.form['measure_type'],
+        'prep_type':request.form['prep_type']
+    })
+    return redirect(url_for('add_ingredient'))
                             
 @app.route('/add_method')
 def add_method():
