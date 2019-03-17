@@ -1,0 +1,10 @@
+{% extends 'base.html' %} {% block content %}
+
+<h3>Thank you for your submittion</h3>
+
+<h5>What do you want to do next?</h5>
+
+<a class="waves-effect waves-light btn" href="{{url_for('add_ingredient')}}"><i class="material-icons left">arrow_bakc</i>Add more ingredients</a>
+<a class="waves-effect waves-light btn" href="{{url_for('add_method')}}"><i class="material-icons right">arrow_forward</i>Add method</a>
+
+{% endblock %}

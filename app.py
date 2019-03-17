@@ -33,13 +33,12 @@ def insert_recipe():
         'allergen':request.form['allergen_name'],
         'prep-time':request.form['prep_time'],
         'cook_time':request.form['cook_time'],
-        'amount_serves':request.form['amount_serves']
+        'amount_serves':request.form['amount_serves'],
+        'image_file': request.form['image_file']
     })
-    return redirect(url_for('thank_you'))
+    return redirect(url_for('add_ingredient'))
 
-@app.route('thank_you')
-def thank_you():
-    return redirect(url_for('thank_you.html'))
+
                             
 @app.route('/add_ingredient')
 def add_ingredient():
@@ -56,7 +55,11 @@ def insert_ingredient():
         'measure_type':request.form['measure_type'],
         'prep_type':request.form['prep_type']
     })
-    return redirect(url_for('add_ingredient'))
+    return redirect(url_for('thank_you'))
+    
+@app.route('/thank_you')
+def thank_you():
+    return render_template('thank_you.html')
                             
 @app.route('/add_method')
 def add_method():
