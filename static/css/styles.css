@@ -1,0 +1,13 @@
+.btn-sml {
+    height: 24px;
+    width: 60px;
+    line-height: 24px;
+    margin: 5px 5px;
+    padding: 0 0.5em;
+}
+
+
+
+.recipe_name {
+    margin-top: 5px;
+}
