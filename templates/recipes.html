@@ -6,9 +6,18 @@
   <ul class="collapsible" data-collapsible="accordion">
       {% for recipe in recipes %}
     <li>
-      <div class="collapsible-header"><i class="material-icons">local_dining</i><strong>{{recipe.recipe_name}}.</strong></div> 
-      <div class="submiited_by">Added by{{recipe.user_name}}</div>
-      <div class="collapsible-body"><span>{{recipe.brief_description}}</span></div>
+      <div class="collapsible-header">
+        <div class="col s3">
+          <i class="material-icons">expand_more</i>
+           <a class="waves-effect waves-light btn btn-sml">View</a>
+          <a class="waves-effect waves-light btn btn-sml blue">Edit</a>
+          <i class="material-icons">local_dining</i>
+        </div>
+        <div class="recipe_name col s9 ">
+          <strong>{{recipe.recipe_name}}.</strong></div>
+        </div>
+        <div class="submiited_by">Added by{{recipe.user_name}}</div>
+        <div class="collapsible-body"><span>{{recipe.brief_description}}</span></div>
     </li>
    {% endfor %}
   </ul>
