@@ -63,8 +63,14 @@ def thank_you():
                             
 @app.route('/add_method')
 def add_method():
-    return render_template('method.html')            
-
+    return render_template('method.html') 
+    
+@app.route('/insert_method', methods=['POST'])
+def insert_method():
+    method=mongo.db.method
+    method.insert_one(request.form.to_dict())
+    return redirect(url_for('get_recipes'))
+    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
