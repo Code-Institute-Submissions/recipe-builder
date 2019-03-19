@@ -21,7 +21,9 @@ def add_recipe():
     return render_template('addrecipe.html', 
                             categories=mongo.db.category.find(),
                             allergens=mongo.db.allergen.find(),
-                            serves=mongo.db.serves.find())
+                            serves=mongo.db.serves.find(),
+                            measurements=mongo.db.measurements.find(),
+                            preparation=mongo.db.preparation.find())
                             
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
@@ -34,9 +36,14 @@ def insert_recipe():
         'prep-time':request.form['prep_time'],
         'cook_time':request.form['cook_time'],
         'amount_serves':request.form['amount_serves'],
-        'image_file': request.form['image_file']
+        'image_file': request.form['image_file'],
+        'ingredient_name':request.form['ingredient_name'],
+        'amount':request.form['amount'],
+        'measure_type':request.form['measure_type'],
+        'prep_type':request.form['prep_type'],
+        'method_description':request.form['method_description']
     })
-    return redirect(url_for('add_ingredient'))
+    return redirect(url_for('get_recipes'))
 
 
                             
