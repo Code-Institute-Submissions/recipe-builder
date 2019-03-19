@@ -45,39 +45,6 @@ def insert_recipe():
     })
     return redirect(url_for('get_recipes'))
 
-
-                            
-@app.route('/add_ingredient')
-def add_ingredient():
-    return render_template('addingredients.html',
-                            measurements=mongo.db.measurements.find(),
-                            preparation=mongo.db.preparation.find())
-                            
-@app.route('/insert_ingredient', methods=['POST'])
-def insert_ingredient():
-    ingredient=mongo.db.ingredients
-    ingredient.insert_one({
-        'ingredient_name':request.form['ingredient_name'],
-        'amount':request.form['amount'],
-        'measure_type':request.form['measure_type'],
-        'prep_type':request.form['prep_type']
-    })
-    return redirect(url_for('thank_you'))
-    
-@app.route('/thank_you')
-def thank_you():
-    return render_template('thank_you.html')
-                            
-@app.route('/add_method')
-def add_method():
-    return render_template('method.html') 
-    
-@app.route('/insert_method', methods=['POST'])
-def insert_method():
-    method=mongo.db.method
-    method.insert_one(request.form.to_dict())
-    return redirect(url_for('get_recipes'))
-    
     
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
