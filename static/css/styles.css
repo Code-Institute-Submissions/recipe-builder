@@ -6,6 +6,11 @@
     padding: 0 0.5em;
 }
 
+.delete_btn {
+    height: 30px;
+    width: 60px;
+}
+
 .recipe_name {
     margin-top: 5px;
 }
