@@ -37,7 +37,7 @@
 
       <div class="input-field col s6">
         <i class="material-icons prefix">priority_high</i>
-        <select id="allergen_name" name="allergen_name">
+        <select multiple id="allergen_name" name="allergen_name">
           <option value="" disabled selected>Choose allergen</option>
           {% for allergy in allergens %}
           <option value="{{allergy.allergen_name}}">{{allergy.allergen_name}}</option>
@@ -87,46 +87,8 @@
         <!--Ingredient Title-->
         <div class="row">
           <div class="input-field col s12">
-            <i class="material-icons prefix">restaurant</i>
-            <input id="ingredient_name" name="ingredient_name" type="text" class="validate">
-            <label for="icon_prefix">Ingredient</label>
-          </div>
-        </div>
-        <!--Amount-->
-        <div class="row">
-          <div class="input-field col s6">
-            <i class="material-icons prefix">exposure_plus_1</i>
-            <input id="amount" name="amount" type="text" class="validate">
-            <label for="icon_prefix">Amount</label>
-          </div>
-
-          <!--Measurement-->
-
-          <div class="input-field col s6">
-            <i class="material-icons prefix">poll</i>
-            <select id="measure_type" name="measure_type">
-          <option value="" disabled selected>Choose measurement</option>
-          {% for measure in measurements %}
-          <option value="{{measure.measure_type}}">{{measure.measure_type}}</option>
-          {% endfor %}
-        </select>
-            <label>Measurement</label>
-          </div>
-        </div>
-        <!--Preparation-->
-        <div class="row">
-          <div class="input-field col s12">
-            <i class="material-icons prefix">poll</i>
-            <select id="prep_type" name="prep_type">
-          <option value="" disabled selected>Choose preparation</option>
-          {% for prep in preparation %}
-          <option value="{{prep.prep_type}}">{{prep.prep_type}}</option>
-          {% endfor %}
-        </select>
-            <label>Preparation</label>
-          </div>
-        </div>
-        <a class="waves-effect waves-light btn"><i class="material-icons right">playlist_add</i>Add more ingredients</a>
+            <textarea id="ingredients" name="ingredients" class="ingredients" ></textarea>
+            <label for="textarea1">Ingredients (please add one ingredient on each new line)</label>
         
         <!--Method-->
         <h3>Add The Method</h3>

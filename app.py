@@ -15,7 +15,8 @@ mongo = PyMongo(app)
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.recipes.find())
 
-    
+  
+"""Add recipe form"""  
 @app.route('/add_recipe')
 def add_recipe():
     return render_template('addrecipe.html', 
@@ -25,7 +26,8 @@ def add_recipe():
                             measurements=mongo.db.measurements.find(),
                             preparation=mongo.db.preparation.find())
                             
-                            
+ 
+"""Submit recipe to database"""
 @app.route('/insert_recipe', methods=['POST'])
 def insert_recipe():
     recipes=mongo.db.recipes
@@ -38,35 +40,31 @@ def insert_recipe():
         'cook_time':request.form['cook_time'],
         'amount_serves':request.form['amount_serves'],
         'image_file': request.form['image_file'],
-        'ingredient_name':request.form['ingredient_name'],
-        'amount':request.form['amount'],
-        'measure_type':request.form['measure_type'],
-        'prep_type':request.form['prep_type'],
+        'ingredients':request.form['ingredients'],
         'method_description':request.form['method_description']
     })
     return redirect(url_for('get_recipes'))
 
+
+"""Edit recipe form"""
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
     the_recipe=mongo.db.recipes.find_one({"_id":ObjectId(recipe_id)})
     all_categories = mongo.db.category.find()
     all_allergens = mongo.db.allergen.find()
-    all_measurements = mongo.db.measurements.find()
-    all_preparations = mongo.db.preparation.find()
     all_serves = mongo.db.serves.find()
     return render_template('editrecipe.html',
                             recipe=the_recipe,
                             categories=all_categories,
                             allergens=all_allergens,
-                            measurements=all_measurements,
-                            preparation=all_preparations,
                             serves=all_serves)
             
 
+"""Submit edited recipe to database"""
 @app.route('/update_recipe/<recipe_id>', methods=["POST"])
 def update_recipe(recipe_id):
-    recipes = mongo.db.recipes
-    recipes.update({'_id':ObjectId(recipe_id)},
+    recipe = mongo.db.recipes
+    recipe.update({'_id':ObjectId(recipe_id)},
     {
         'recipe_name':request.form.get('recipe_name'),
         'brief_description':request.form.get('brief_description'),
@@ -76,13 +74,26 @@ def update_recipe(recipe_id):
         'cook_time':request.form.get('cook_time'),
         'amount_serves':request.form.get('amount_serves'),
         'image_file': request.form.get('image_file'),
-        'ingredient_name':request.form.get('ingredient_name'),
-        'amount':request.form.get('amount'),
-        'measure_type':request.form.get('measure_type'),
-        'prep_type':request.form.get('prep_type'),
+        'ingredients':request.form.get('ingredients'),
         'method_description':request.form.get('method_description')
     })
     return redirect(url_for('get_recipes'))
+    
+
+"""Delete recipe from database"""    
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    mongo.db.recipes.remove({'_id':ObjectId(recipe_id)})
+    return redirect (url_for('get_recipes'))
+
+
+"""View recipe"""    
+@app.route('/view_recipe/<recipe_id>')
+def view_recipe(recipe_id):
+    recipe = mongo.db.recipes
+    recipe.find_one({'_id':ObjectId(recipe_id)})
+    return render_template("viewrecipe.html", recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
+                        
 
 
 if __name__ == '__main__':
