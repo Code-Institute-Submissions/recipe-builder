@@ -8,71 +8,95 @@
 
     <!--Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    
+
     <!--Font Awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  
+
     <!--Materialise CSS-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
-    
-    <!--css-->
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}" type="text/css" />
 
-    <title>Love Food</title>
+    <!--Custom css-->
+    <link rel="stylesheet" href="../static/css/styles.css" type="text/css" />
+
+    <title>{% block page_title %}{% endblock %}</title>
 </head>
 
 <body>
-    <nav class="navbar">
-        <div class="nav-wrapper">
-            <a href="#!" class="brand-logo">Love Food</a>
+    <nav>
+        <div class="nav-wrapper navbar">
+            <a href="{{url_for('index')}}" class="brand-logo">Love Food</a>
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
-                <li><a href="sass.html">Home</a></li>
-                <li><a href="{{url_for('add_recipe')}}">Create Recipes</a></li>
-                <li><a href="collapsible.html">Search Recipes</a></li>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{{ url_for('add_recipe') }}">Create Recipes</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    
+                {% else %}    
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('registration') }}">Register</a></li>
+                {% endif %}
             </ul>
             <ul class="side-nav" id="mobile-demo">
-                <li><a href="sass.html">Home</a></li>
-                <li><a href="{{url_for('add_recipe')}}">Create Recipes</a></li>
-                <li><a href="collapsible.html">Search Recipes</a></li>
-            </ul>
+                <li><a href="{{ url_for('index') }}">Home</a></li>
+                {% if user.is_authenticated %}
+                    <li><a href="{{ url_for('add_recipe') }}">Create Recipes</a></li>
+                    <li><a href="{{ url_for('logout') }}">Logout</a></li>
+                    
+                {% else %}    
+                    <li><a href="{{ url_for('login') }}">Login</a></li>
+                    <li><a href="{{ url_for('registration') }}">Register</a></li>
+                {% endif %}
+            </ul> 
         </div>
+         
     </nav>
-
-    <h1>Love Food Recipe Builder</h1>
+    <header class=jumbotron>
+    <h1>{% block page_heading %}{% endblock %}</h1>
+    </header>
     <div class="container">
-    {% block content %} {% endblock %}
+        {% block content %} {% endblock %}
     </div>
 
- <!--jQuery before materialize.js-->
+    <!--jQuery before materialize.js-->
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script type="text/javascript" src="js/materialize.min.js"></script>
-   <!--Materialise JavaScript-->
+    <!--Materialise JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
-   
+
 
     <!--jQuery-->
     <script type="text/javascript">
         $(document).ready(function() {
             $(".button-collapse").sideNav();
-           $('.collapsible').collapsible();
-           $('select').material_select();
+            $('.collapsible').collapsible();
+            $('select').material_select();
         })
-        
+
         $('.timepicker').pickatime({
-    default: '00:00', // Set default time: 'now', '1:30AM', '16:30'
-    fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
-    twelvehour: false, // Use AM/PM or 24-hour format
-    donetext: 'OK', // text for done-button
-    cleartext: 'Clear', // text for clear-button
-    canceltext: 'Cancel', // Text for cancel-button,
-    container: undefined, // ex. 'body' will append picker to body
-    autoclose: false, // automatic close timepicker
-    ampmclickable: false, // make AM PM clickable
-    aftershow: function(){} //Function for after opening timepicker
-  });
-   $('#textarea1').val('New Text');
-  $('#textarea1').trigger('autoresize');
+            default: '00:00', // Set default time: 'now', '1:30AM', '16:30'
+            fromnow: 0, // set default time to * milliseconds from now (using with default = 'now')
+            twelvehour: false, // Use AM/PM or 24-hour format
+            donetext: 'OK', // text for done-button
+            cleartext: 'Clear', // text for clear-button
+            canceltext: 'Cancel', // Text for cancel-button,
+            container: undefined, // ex. 'body' will append picker to body
+            autoclose: false, // automatic close timepicker
+            ampmclickable: false, // make AM PM clickable
+            aftershow: function() {} //Function for after opening timepicker
+        });
+        $('#textarea1').val('New Text');
+        $('#textarea1').trigger('autoresize');
+
+        // Get the modal
+        var modal = document.getElementById('id01');
+
+        // When the user clicks anywhere outside of the modal, close it
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
     </script>
 </body>
 
