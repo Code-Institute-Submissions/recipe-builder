@@ -1,0 +1,25 @@
+{% extends 'base.html' %} 
+
+{% block page_title %}Home Page{% endblock %}
+
+{% block page_heading %}Love Food - Recipe Builder{% endblock %}
+{% block content %}
+<div class="row">
+    {% for recipe in recipes %}
+        <div class="col s12 m4">
+          <div class="card small">
+            <div class="card-image">
+              <img src="{{ recipe.image_file }}" alt="">
+              <span class="card-title">{{ recipe.recipe_name }}</span>
+            </div>
+            <div class="card-content">
+              <p>{{ recipe.brief_description }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}>">View</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+{% endblock %}

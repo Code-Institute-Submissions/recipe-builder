@@ -1,7 +1,8 @@
 import os
-from flask import Flask, render_template, redirect, request, url_for
+from flask import Flask, render_template, redirect, request, url_for, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+import re
 
 
 app = Flask(__name__)
@@ -11,9 +12,24 @@ app.config["MONGO_URI"] = os.getenv("MONGO_URI")
 mongo = PyMongo(app)
 
 @app.route('/')
+@app.route('/index')
+def index():
+    recipes = mongo.db.recipes.find()
+    user = mongo.db.users
+    return render_template('index.html', user=user, recipes=recipes)
+
+"""Logs user out and redirects to Home page"""    
+@app.route('/logout')
+def logout():
+    session.clear()
+    return redirect(url_for('index'))
+
+
 @app.route('/get_recipes')
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.recipes.find())
+
+
 
   
 """Add recipe form"""  
@@ -34,7 +50,7 @@ def insert_recipe():
     recipes.insert_one({
         'recipe_name':request.form['recipe_name'],
         'brief_description':request.form['brief_description'],
-        'category_name':request.form['category_name'],
+        'category':request.form['category'],
         'allergen_name':request.form['allergen_name'],
         'prep_time':request.form['prep_time'],
         'cook_time':request.form['cook_time'],
@@ -93,7 +109,40 @@ def view_recipe(recipe_id):
     recipe = mongo.db.recipes
     recipe.find_one({'_id':ObjectId(recipe_id)})
     return render_template("viewrecipe.html", recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
-                        
+
+
+"""Search Database for Recipes Results"""
+@app.route('/search', methods = ["GET"])
+def search(): 
+    orig_query = request.args['enquiry']
+    enquiry = {'$regex': re.compile('.*{}.*'.format(orig_query)), '$options': 'i'}
+    results = mongo.db.recipes.find({
+        '$or': [
+            {'recipe_name': enquiry},
+            {'category_name': enquiry},
+            {'allergen_name': enquiry},
+            {'ingredients': enquiry},
+            {'amount_serves': enquiry},
+        ]
+    })
+    return render_template('search.html', query=orig_query, results=results)
+    
+#    search = mongo.db.recipes
+#    output = []
+#    for q in search.find():
+#      output.append({'recipe_name': q['recipe_name'], 'category_name': q['category_name'], 'allergen_name': q['allergen_name'], 'ingredients': q['ingredients'], 'amount': q['amount_serves']})
+#    return jsonify({'result': output})
+#    return render_template("search.html")
+    
+"""Search using keyword"""
+@app.route('/search/<name>')
+def search_by_keyword(name):
+    search_by_keyword = mongo.db.recipes
+    q = search_by_keyword.find({'name' : name})
+    output = {'name' : q['name']}
+
+    return jsonify({'results' : output})
+
 
 
 if __name__ == '__main__':
