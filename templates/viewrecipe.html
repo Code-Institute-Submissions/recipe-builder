@@ -1,24 +1,31 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %} 
 
-<h4>{{ recipe.recipe_name }}</h4>
+{% block page_title %}{{recipe.recipe_name }}{% endblock %}
 
-<div class="row">
-    <div class="col s4">
-        <img class="recipe_image" src="{{ recipe.image_file }}">
-        <h5>{{ recipe.brief_description }}</h5>
+
+{% block page_heading %}Love Food - {{recipe.recipe_name }} {% endblock %}
+{% block content %}
+<div class="container">
+    <h4>{{ recipe.recipe_name }}</h4>
+
+    <div class="row">
+        <div class="col s4">
+            <p>Views: {{ recipe.views }}</p>
+            <img class="recipe_image" src="{{ recipe.image_file }}">
+            <h5>{{ recipe.brief_description }}</h5>
+        </div>
+        <div class="col s8">
+            <h4>Ingredients</h4>
+            <p>{{ recipe.ingredients }}</p>
+
+            <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml">Delete</a>
+            <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml blue">Edit</a>
+        </div>
     </div>
-    <div class="col s8">
-        <h4>Ingredients</h4>
-        <p>{{ recipe.ingredients }}</p>
-    
-    <a href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml">Delete</a>
-    <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml blue">Edit</a>
+    <div class="row">
+        <h4>Method</h4>
+        <p>{{ recipe.method_description }}</p>
     </div>
 </div>
-<div class="row">
-    <h4>Method</h4>
-    <p>{{ recipe.method_description }}</p>
-</div>
-
 
 {% endblock %}
