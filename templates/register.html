@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block page_title %}Log In{% endblock %} {% block page_heading %}Log In{% endblock %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
+{% extends 'base.html' %} {% block page_title %}Register{% endblock %} {% block page_heading %}Please register{% endblock %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
 <ul class=flashes>
     {% for message in messages %}
     <li>{{ message }}</li>
@@ -8,20 +8,24 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
-            <form method=POST action="{{ url_for('login') }}">
+            <form method="POST" action="{{ url_for('register') }}">
                 <div class="form-group">
-                    <label for="exampleInputEmail1">Username</label>
+                    <label for="inputUsername">Username</label>
                     <input type="text" class="form-control" name="username" placeholder="Username">
                 </div>
                 <div class="form-group">
-                    <label for="exampleInputPassword1">Password</label>
+                    <label for="inputPassword">Password</label>
                     <input type="password" class="form-control" name="pass" placeholder="Password">
                 </div>
-                <button type="submit" class="btn btn-primary btn-block">Log In</button>
+                <button type="submit" class="btn waves-effect waves-light" name="action">Register
+                    <i class="material-icons right">send</i>
+                </button>
             </form>
             <br>
         </div>
     </div>
 </div>
+
+
 
 {% endblock %}
