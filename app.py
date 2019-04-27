@@ -1,37 +1,90 @@
-import os
-from flask import Flask, render_template, redirect, request, url_for, session
-from flask_pymongo import PyMongo
+from flask import Flask, render_template, redirect, request, url_for, session, flash
+from forms import RegistrationForm, LoginForm, RecipeSearchForm
+from flask_pymongo import PyMongo, DESCENDING
+from flask_login import LoginManager, current_user, login_user, logout_user, login_required, UserMixin
 from bson.objectid import ObjectId
 import re
+import os
+import bcrypt
 
 
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'recipe_builder'
 app.config["MONGO_URI"] = os.getenv("MONGO_URI")
+app.secret_key = os.getenv("SECRET_KEY")
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login' #the login view of application
 
 mongo = PyMongo(app)
 
-@app.route('/')
-@app.route('/index')
-def index():
-    recipes = mongo.db.recipes.find()
-    user = mongo.db.users
-    return render_template('index.html', user=user, recipes=recipes)
+@login_manager.user_loader
+def load_user(user_id):
+    return User(user_id)
+    
+class User(UserMixin):
+    def __init__(self,id):
+        self.id = id
 
-"""Logs user out and redirects to Home page"""    
-@app.route('/logout')
+@app.route('/')
+@app.route('/index', methods=['GET', 'POST'])
+def index():
+    recipes = mongo.db.recipes.find().sort([('views', DESCENDING)])
+    
+    if 'username' in session:
+        return 'You are logged in as ' + session['username']
+    
+    return render_template('index.html', recipes=recipes)
+    
+
+"""User Login"""    
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    users = mongo.db.users
+    if request.method == 'POST':
+        
+        login_user = users.find_one({'name' : request.form['username']})
+
+        if login_user:
+            if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+                session['username'] = request.form['username']
+                return redirect(url_for('index'))
+
+        return 'Invalid username/password combination'
+    else:
+       return render_template('login.html')
+    
+@app.route('/logout/')
 def logout():
     session.clear()
     return redirect(url_for('index'))
 
+    
+"""User Registration Form"""    
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    form =  RegistrationForm()
+    
+    if request.method == 'POST':
+        users = mongo.db.users
+        exsisting_user = users.find_one({'name' : request.form['username']})
+        
+        if exsisting_user is None:
+            hashpass = bcrypt.hashpw(request.form['pass'].encode('utf-8'), bcrypt.gensalt())
+            users.insert({'name' : request.form['username'], 'password' : hashpass})
+            session['username'] = request.form['username']
+            return redirect(url_for('index'))
+        return 'That username already exists!'
+        
+    return render_template('register.html', form = form)
 
+
+"""Get all recipes"""
 @app.route('/get_recipes')
 def get_recipes():
     return render_template("recipes.html", recipes=mongo.db.recipes.find())
 
 
-
-  
 """Add recipe form"""  
 @app.route('/add_recipe')
 def add_recipe():
@@ -103,50 +156,47 @@ def delete_recipe(recipe_id):
     return redirect (url_for('get_recipes'))
 
 
-"""View recipe"""    
+"""View full recipe"""    
 @app.route('/view_recipe/<recipe_id>')
 def view_recipe(recipe_id):
     recipe = mongo.db.recipes
-    recipe.find_one({'_id':ObjectId(recipe_id)})
-    return render_template("viewrecipe.html", recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
+    recipe.find_one_and_update(
+        {'_id': ObjectId(recipe_id)},
+        {'$inc': {'views': 1}}
+    )
+    recipe_db = mongo.db.recipes.find_one({'_id': ObjectId(recipe_id)})
+    return render_template("viewrecipe.html", recipe=recipe_db)
 
 
-"""Search Database for Recipes Results"""
-@app.route('/search', methods = ["GET"])
-def search(): 
-    orig_query = request.args['enquiry']
-    enquiry = {'$regex': re.compile('.*{}.*'.format(orig_query)), '$options': 'i'}
-    results = mongo.db.recipes.find({
+"""Search Database for Recipes"""
+@app.route('/find_recipes')
+def find_recipes():
+    orig_query = request.args.get('query')
+    query = {'$regex': re.compile('.*{}.*'.format(orig_query)), '$options': 'i'}
+    recipes = mongo.db.recipes.find({
         '$or': [
-            {'recipe_name': enquiry},
-            {'category_name': enquiry},
-            {'allergen_name': enquiry},
-            {'ingredients': enquiry},
-            {'amount_serves': enquiry},
+            {'title': query},
+            {'allergens': query},
+            {'ingredients': query},
         ]
     })
-    return render_template('search.html', query=orig_query, results=results)
+    return render_template('search.html', enquiry=orig_query, results=recipes)
     
-#    search = mongo.db.recipes
-#    output = []
-#    for q in search.find():
-#      output.append({'recipe_name': q['recipe_name'], 'category_name': q['category_name'], 'allergen_name': q['allergen_name'], 'ingredients': q['ingredients'], 'amount': q['amount_serves']})
-#    return jsonify({'result': output})
-#    return render_template("search.html")
-    
-"""Search using keyword"""
-@app.route('/search/<name>')
-def search_by_keyword(name):
-    search_by_keyword = mongo.db.recipes
-    q = search_by_keyword.find({'name' : name})
-    output = {'name' : q['name']}
 
-    return jsonify({'results' : output})
-
+"""Search Database for Recipes Results"""
+@app.route('/results')
+def search_recipes():
+    results = find_recipes()
+    if results:
+        for k,v in results.items():
+            if k != "_id":
+                return redirect(url_for('get_recipes'))
+ 
 
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
+
             
