@@ -94,7 +94,9 @@ def insert_recipe():
         'amount_serves':request.form['amount_serves'],
         'image_file': request.form['image_file'],
         'ingredients':request.form['ingredients'],
-        'method_description':request.form['method_description']
+        'method_description':request.form['method_description'],
+        'views': 0,
+        'user':session['username']
     })
     return redirect(url_for('get_recipes'))
 

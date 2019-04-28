@@ -5,20 +5,27 @@
     
   <ul class="collapsible" data-collapsible="accordion">
       {% for recipe in recipes %}
-    <li>
-      <div class="collapsible-header">
-        <div class="col s3">
-          <i class="material-icons">expand_more</i>
-           <a href="{{url_for('view_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml">View</a>
-          <a href="{{url_for('edit_recipe', recipe_id=recipe._id)}}" class="waves-effect waves-light btn btn-sml blue">Edit</a>
-          <i class="material-icons">local_dining</i>
+   <div class="row">
+    {% for recipe in recipes %}
+        <div class="col s12 m4">
+          <div class="card small">
+            <div class="card-image">
+              <img src="{{ recipe.image_file }}" alt="">
+            </div>
+            <div class="card-content">
+              <span class="card-title">{{ recipe.recipe_name }}</span>
+              <p>{{ recipe.brief_description }}</p>
+            </div>
+            <div class="card-action">
+              <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View</a>
+            </div>
+            <div>
+              <p>Submitted by {{ recipe.user }}</p>
+            </div>
+          </div>
         </div>
-        <div class="recipe_name col s9 ">
-          <strong>{{recipe.recipe_name}}.</strong></div>
-        </div>
-        <div class="submiited_by">Added by{{recipe.user_name}}</div>
-        <div class="collapsible-body"><span>{{recipe.brief_description}}</span></div>
-    </li>
+        {% endfor %}
+      </div>
    {% endfor %}
   </ul>
 {% endblock %}
