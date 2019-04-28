@@ -22,24 +22,24 @@ def index():
    
     return render_template('index.html', recipes=recipes)
 
-    
-"""User Login """
-@app.route('/login', methods=['POST'])
+
+@app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
-        users = mongo.db.users
+        users =mongo.db.users
         login_user = users.find_one({'name' : request.form['username']})
-
+        
         if login_user:
-            if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password'].encode('utf-8')) == login_user['password'].encode('utf-8'):
+            if bcrypt.hashpw(request.form['pass'].encode('utf-8'), login_user['password']) == login_user['password']:
                 session['username'] = request.form['username']
                 return redirect(url_for('index'))
             flash('Invalid username/password combination')
+    return render_template('login.html')
+    
 
-        return render_template('login.html')
 
 """User Logout"""  
-@app.route('/logout/')
+@app.route('/logout')
 def logout():
     session.clear()
     return redirect(url_for('index'))

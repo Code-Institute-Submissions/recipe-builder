@@ -19,9 +19,6 @@
             <div class="card-action">
               <a href="{{ url_for('view_recipe', recipe_id=recipe._id) }}">View</a>
             </div>
-            <div>
-              <p>Submitted by {{ recipe.user }}</p>
-            </div>
           </div>
         </div>
         {% endfor %}
