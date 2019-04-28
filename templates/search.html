@@ -9,7 +9,7 @@ Search Results{% endblock %}
 
 <h3>Results for: {{ enquiry }}</h3>
 <div class="row">
-    {% for recipe in results %}
+{% for recipe in results %}
     <div class="result">
         <img src="{{ recipes.image_file }}"
         <div class="recipe_body">
@@ -18,7 +18,7 @@ Search Results{% endblock %}
         </div>
         <a href="{{  url_for('view_recipe', recipe_id=recipe._id) }}" class="btn">View Recipe</a>
     </div>
-    {% endfor %}
+{% endfor %}
 </div>
 
 {% endblock %}
