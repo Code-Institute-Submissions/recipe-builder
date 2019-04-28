@@ -23,6 +23,7 @@ def index():
     return render_template('index.html', recipes=recipes)
 
 
+"""User Login Form"""
 @app.route('/login', methods=['POST', 'GET'])
 def login():
     if request.method == 'POST':
@@ -87,7 +88,7 @@ def insert_recipe():
     recipes.insert_one({
         'recipe_name':request.form['recipe_name'],
         'brief_description':request.form['brief_description'],
-        'category':request.form['category'],
+        'category_name':request.form['category_name'],
         'allergen_name':request.form['allergen_name'],
         'prep_time':request.form['prep_time'],
         'cook_time':request.form['cook_time'],
