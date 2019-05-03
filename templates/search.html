@@ -1,15 +1,8 @@
-{% extends 'base.html' %}
-
-{% block page_title %}Results{% endblock %}
-
-{% block page_heading %}Love Food<br>
-Search Results{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% block page_title %}Results{% endblock %} {% block page_heading %}Love Food<br> Search Recipes{% endblock %} {% block content %}
 
 <h3>Results for: {{ enquiry }}</h3>
 <div class="row">
-{% for recipe in results %}
+    {% for recipe in results %}
     <div class="result">
         <img src="{{ recipes.image_file }}"
         <div class="recipe_body">
@@ -21,4 +14,37 @@ Search Results{% endblock %}
 {% endfor %}
 </div>
 
-{% endblock %}
+    <!--<div class="input-field col s12">
+        <select>
+        
+      <option value="" disabled selected>Choose which category</option>
+      {% for category in categories %}
+      <option value="{{ category.category_name }}">{{ category.category_name }}</option>
+      {% endfor %}
+    </select>
+        <label>Category</label>
+    </div>
+    <div class="input-field col s12">
+        <select>
+        
+      <option value="" disabled selected>Choose how many servings</option>
+      {% for serving in servings %}
+      <option value="{{ serves.amount_serves }}">{{ serves.amount_serves }}</option>
+      {% endfor %}
+    </select>
+        <label>Serves</label>
+    </div>
+    <div class="input-field col s12">
+        <select>
+        
+      <option value="" disabled selected>Choose user</option>
+      {% for user in users %}
+      <option value="{{ users.name }}">{{ users.name }}</option>
+      {% endfor %}
+    </select>
+        <label>Submitted by:</label>
+    </div>-->
+
+
+
+    {% endblock %}

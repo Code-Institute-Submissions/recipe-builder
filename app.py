@@ -161,28 +161,16 @@ def view_recipe(recipe_id):
 """Search Database for Recipes"""
 @app.route('/find_recipes')
 def find_recipes():
-    orig_query = request.args.get('query')
+    orig_query=request.args.get('query')
     query = {'$regex': re.compile('.*{}.*'.format(orig_query)), '$options': 'i'}
     recipes = mongo.db.recipes.find({
         '$or': [
             {'title': query},
             {'allergens': query},
-            {'ingredients': query},
         ]
     })
     return render_template('search.html', enquiry=orig_query, results=recipes)
     
-
-"""Search Database for Recipes Results"""
-@app.route('/results')
-def search_recipes():
-    results = find_recipes()
-    if results:
-        for k,v in results.items():
-            if k != "_id":
-                return redirect(url_for('get_recipes'))
- 
-
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
