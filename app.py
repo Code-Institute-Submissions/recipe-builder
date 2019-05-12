@@ -170,6 +170,7 @@ def find_recipes():
         ]
     })
     return render_template('search.html', enquiry=orig_query, results=recipes)
+
     
 
 if __name__ == '__main__':
