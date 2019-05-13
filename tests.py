@@ -1,26 +1,22 @@
-import unittest
+import os 
+import tempfile
+
+import pytest
+
 import app as app_module
 
-from flask_pymongo import PyMongo
+app = app_mudule.app
 
-app = app_module.app
-
-#Config test DB on Mongo
-app.config["TESTING"] = True
-app.config["MONGO_URI"] = 'mongodb://localhost:27017//testing'
-
-
-class TestUrls(unittest.TestCase):
-    def setUp(self):
-        self.client = app.test_client()
+@pytest.fixture
+def client():
+    db_fd, app.config['DATABASE'] = tempfile.mkstemp()
+    app.config['TESTING'] = True
+    client = app.test_client()
     
-    def tearDown(self):
-        pass
+    with app.app_context():
+        init_db()
+        
+    yield client
     
-    def test_index(self):
-        """Test Home Page loading"""
-        result = self.client.get('/')
-        assert result.status == '200 OK'
-
-if __name__ == '__main__':
-    unittest.main()
+    os.close(db_fd)
+    os.unlink(app.config['DATABASE'])

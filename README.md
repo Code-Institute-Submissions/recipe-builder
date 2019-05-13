@@ -1,6 +1,8 @@
 # Love Food Recipe Builder
 
-This project is an application which includes a database of recipes that can be searched. When a user has registered and logged in to the application the user is able to create, update and delete their own recipes.
+## What is it about?
+
+I have developed this project using the skills learnt to build a Flask Website, using MongoDB. The application includes a database of recipes that can be searched by any user. When a user has registered and logged in to the application the user is able to create, update and delete their recipes. This project can be viewed at https://love-food-recipe-builder.herokuapp.com
 
 ## UX
 
