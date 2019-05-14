@@ -18,7 +18,8 @@ mongo = PyMongo(app)
 @app.route('/')
 @app.route('/index', methods=['GET', 'POST'])
 def index():
-    recipes = mongo.db.recipes.find().sort([('views', DESCENDING)])
+    """Home page gets 6 recipes that are most popular based on views"""
+    recipes = mongo.db.recipes.find().sort([('views', DESCENDING)]).limit(6)
    
     return render_template('index.html', recipes=recipes)
 
@@ -159,17 +160,15 @@ def view_recipe(recipe_id):
 
 
 """Search Database for Recipes"""
-@app.route('/find_recipes')
+@app.route('/find_recipes', )
 def find_recipes():
-    orig_query=request.args.get('query')
-    query = {'$regex': re.compile('.*{}.*'.format(orig_query)), '$options': 'i'}
-    recipes = mongo.db.recipes.find({
-        '$or': [
-            {'title': query},
-            {'allergens': query},
-        ]
-    })
-    return render_template('search.html', enquiry=orig_query, results=recipes)
+    recipes = mongo.db.recipes
+    if request.method=='POST':
+        category=request.form.get("category")
+        print(category)
+        recipes = recipes.find({ "$text: { $search:'category'}" })
+        return render_template('search.html', recipes=recipes)
+    return render_template('search.html')
 
     
 
@@ -177,5 +176,3 @@ if __name__ == '__main__':
     app.run(host=os.environ.get('IP'),
             port=int(os.environ.get('PORT')),
             debug=True)
-
-            

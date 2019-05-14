@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% block page_title %}Log In{% endblock %} {% block page_heading %}love Food<br>Log In{% endblock %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
+{% extends 'base.html' %} {% block page_title %}Log In{% endblock %} {% block page_heading %}Log In{% endblock %} {% block content %} {% with messages = get_flashed_messages() %} {% if messages %}
 <ul class=flashes>
     {% for message in messages %}
     <li>{{ message }}</li>

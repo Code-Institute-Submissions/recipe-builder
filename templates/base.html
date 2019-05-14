@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    
-      
+
+
     <!--Google Icon Font-->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -53,10 +53,20 @@
 
     </nav>
     <div class="row">
-        <div class="col s12 m4">
+        <div class="col s4 m6">
+            <div class="title">
+                <h1 class="heading">{% block page_heading %}{% endblock %}</h1>
+                {% if 'username' in session %}
+                <h5 class="heading">Hello {{ session['username'] }}</h5>
+                {% else %}
+                <h5 class="heading">Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a></h5>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col s3 m4">
             <div class="search">
                 <form action="{{ url_for('find_recipes') }}" class="search_box">
-                    <div class="input-field">
+                    <div class="input-field search-bar">
                         <input id="search" type="search" required>
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
@@ -67,20 +77,15 @@
         </div>
     </div>
     <header class=jumbotron>
-        <h1 class="heading">{% block page_heading %}{% endblock %}</h1>
-        {% if 'username' in session %}
-            <h3 class="heading">Hello {{ session['username'] }}</h3>
-        {% else %}
-            <h3 class="heading">Please <a href="{{ url_for('login') }}">login</a> or <a href="{{ url_for('register') }}">register</a></h3>
-        {% endif %}
+
     </header>
     <div class="container">
         {% block content %} {% endblock %}
     </div>
 
     <!--jQuery before materialize.js-->
-   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!--Materialise JavaScript-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
 
