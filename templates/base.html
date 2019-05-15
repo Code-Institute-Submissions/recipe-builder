@@ -65,9 +65,9 @@
         </div>
         <div class="col s3 m4">
             <div class="search">
-                <form action="{{ url_for('find_recipes') }}" class="search_box">
+                <form action="{{ url_for('find_recipes') }}"  method="POST" class="search_box">
                     <div class="input-field search-bar">
-                        <input id="search" type="search" required>
+                        <input id="search" type="search" required="" name="search_term">
                         <label class="label-icon" for="search"><i class="material-icons">search</i></label>
                         <i class="material-icons">close</i>
                     </div>
