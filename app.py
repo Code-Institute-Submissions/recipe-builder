@@ -166,7 +166,8 @@ def find_recipes():
     if request.method=='POST':
         category=request.form.get("category")
         print(category)
-        recipes = recipes.find({ "$text: { $search:'category'}" })
+        mongo.db.collection.createIndex( { "subject" : "text" } )
+        recipes = mongo.db.recipes.find({ "$text": { "$search":category} })
         return render_template('search.html', recipes=recipes)
     return render_template('search.html')
 

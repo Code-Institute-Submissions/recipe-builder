@@ -12,7 +12,7 @@
 }
 
 .btn, .btn-large {
-  background-color: orange;
+  background-color: #f6bb36;
 }
 
 .btn:hover, .btn-large:hover {
@@ -38,17 +38,17 @@ nav .brand-logo{
 }
 
 .heading {
-  color: orange;
+  color: #f6bb36;
   padding-top: 5px;
   padding-left: 100px;
 }
 
 .card-title {
-  color: orange;
+  color: #f6bb36;
 }
 
 nav {
-  background-color: orange;
+  background-color: #f6bb36;
 }
 
 .card.small {
