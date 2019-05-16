@@ -29,6 +29,7 @@
             <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
             <ul class="right hide-on-med-and-down">
                 <li><a href="{{ url_for('index') }}">Home</a></li>
+                <li><a href="{{ url_for('get_recipes') }}">All Recipes</a></li>
                 {% if 'username' in session %}
                 <li><a href="{{ url_for('add_recipe') }}">Create Recipes</a></li>
                 <li><a href="{{ url_for('logout') }}">Logout</a></li>

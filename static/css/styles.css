@@ -6,10 +6,6 @@
   padding: 0 0.5em;
 }
 
-.delete_btn {
-  height: 30px;
-  width: 80px;
-}
 
 .btn, .btn-large {
   background-color: #f6bb36;
@@ -19,7 +15,7 @@
     background-color: darkorange;
 }
 
-h2 {
+h1, h2, h3, h4, h5 {
   color: #f6bb36;
 }
 
