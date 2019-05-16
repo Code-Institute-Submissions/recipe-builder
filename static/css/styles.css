@@ -19,6 +19,10 @@
     background-color: darkorange;
 }
 
+h2 {
+  color: #f6bb36;
+}
+
 .search-bar {
   margin-top: 40px;
 }

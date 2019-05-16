@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% block page_title %}Results{% endblock %} {% block page_heading %}Search Recipes{% endblock %} {% block content %}
 
-<h2>Results for:</h2>
+<h2>Results for: {{ query }}</h2>
 <div class="row">
     {% for recipe in recipes %}
     <div class="col s12 m4">

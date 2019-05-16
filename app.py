@@ -160,15 +160,25 @@ def view_recipe(recipe_id):
 
 
 """Search Database for Recipes"""
-@app.route('/find_recipes', methods=['POST'])
+@app.route('/find_recipes', methods=['GET', 'POST'])
 def find_recipes():
     if request.method=='POST':
-        category=request.form.get("search_term")
-        print(category)
-        mongo.db.recipes.createIndex( { "KEY TO SEARCH OVER" : "text" } )
-        recipes = mongo.db.recipes.find({ "$text": { "$search": category } })
-        return render_template('search.html', recipes=recipes)
+        
+        # get the search term
+        search_term = request.form.get("search_term")
+        
+        #  create the index
+        mongo.db.recipes.create_index( [("$**", 'text')] )
+        
+         # search with the search term that came through the form
+        cursor = mongo.db.recipes.find({ "$text": { "$search": search_term } })
+        recipes = [recipe for recipe in cursor]
+        
+        # send recipes to page
+        return render_template('search.html', recipes=recipes, query=search_term)
+        
     return render_template('search.html')
+    
     
 
 if __name__ == '__main__':
