@@ -90,20 +90,20 @@
         <!--Ingredient Title-->
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="ingredients" name="ingredients" class="ingredients" ></textarea>
+            <textarea id="ingredients" name="ingredients" class="ingredients" cols="20" ></textarea>
             <label for="textarea1">Ingredients (please add one ingredient on each new line)</label>
         
         <!--Method-->
         <h3>Add The Method</h3>
         <div class="row">
           <div class="input-field col s12">
-            <textarea id="method_description" name="method_description" class="method_description"></textarea>
+            <textarea id="method_description" name="method_description" class="method_description" cols="20"></textarea>
             <label for="textarea1">Method Description</label>
           </div>
         </div>
         <div class="row">
-          <a class="waves-effect waves-light btn" href="{{url_for('get_recipes')}}"><i class="material-icons left">arrow_back</i>Back</a>
-          <button class="btn waves-effect waves-light" type="submit" name="action">Next
+          <a class="waves-effect waves-light btn blue btn-sml" href="{{url_for('get_recipes')}}">Back</a>
+          <button class="btn waves-effect waves-light btn-sml" type="submit" name="action">Next
     <i class="material-icons right">arrow_forward</i>
   </button>
         </div>

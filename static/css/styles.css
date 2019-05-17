@@ -67,6 +67,10 @@ nav {
   width: 90%;
 }
 
+textarea {
+  column-count: 30;
+}
+
 /* ---------------------------------Login-------------------*/
 
 /* The Modal (background) */
