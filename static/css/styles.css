@@ -1,3 +1,7 @@
+
+
+/*--------------Buttons------------*/
+
 .btn-sml {
   height: 24px;
   width: 80px;
@@ -6,57 +10,105 @@
   padding: 0 0.5em;
 }
 
+.submit_btn {
+  height: 25px;
+  font-size: 7px;
+  line-height: 26px;
+}
 
-.btn, .btn-large {
+.btn,
+.btn-large {
   background-color: #f6bb36;
 }
 
-.btn:hover, .btn-large:hover {
-    background-color: darkorange;
+.btn:hover,
+.btn-large:hover {
+  background-color: darkorange;
 }
 
-h1, h2, h3, h4, h5 {
+/*--------------Headings------------*/
+
+h1,
+h2,
+h3,
+h4,
+h5 {
   color: #f6bb36;
 }
 
-.search-bar {
-  margin-top: 40px;
-}
-
-nav .brand-logo{
-  padding-left: 60px;  
-}
-
-.recipe_name {
-  margin-top: 5px;
-}
-
-.jumbotron {
-  background-image: url("../images/heart_food.jpeg");
-  background-size: cover;
-  height: 70vh;
+.page_heading {
+  font-size: 20px;
 }
 
 .heading {
   color: #f6bb36;
   padding-top: 5px;
-  padding-left: 100px;
+  text-align: center;
 }
 
-.card-title {
-  color: #f6bb36;
+.sub_heading {
+  font-size: 15px;
+}
+
+/*--------------Search Bar---------------*/
+.search-bar {
+  margin-top: 0px;
+}
+
+.input-field input[type=search]+label {
+    left: 0px;
+}
+
+.material-icons {
+  font-size: 20px;
+}
+
+.input-field input[type=search] ~ .material-icons {
+  font-size: 20px;
+}
+
+input[type=search]:not(.browser-default):focus:not([readonly]) {
+  border-bottom: darkorange;
+  box-shadow: 0 1px 0 0 darkorange;
+  padding-left: 25px;
+}
+
+/*---------------Navbar---------------*/
+
+nav .brand-logo {
+  font-size: 20px;
 }
 
 nav {
   background-color: #f6bb36;
 }
 
+.heading-row {
+  margin-bottom: 5px;
+}
+
+/*---------------Background Image---------------*/
+
+.jumbotron {
+  background-image: url("../images/heart_food.jpeg");
+  background-size: cover;
+  height: 55vh;
+}
+
+.recipe_name {
+  margin-top: 5px;
+}
+
+.card-title {
+  color: #f6bb36;
+}
+
 .card.small {
-    height: 450px;
+  height: 450px;
 }
 
 .card.small .card-image {
-    max-height: 50%;
+  max-height: 50%;
 }
 
 .card.small .card-image+.card-content {
@@ -290,3 +342,31 @@ hr {
     width: 100%;
   }
 }
+
+/*-----------------------------------------iPad media-----------------------------------------*/
+
+@media (min-width: 768px) {
+  nav .brand-logo {
+    padding-left: 60px;
+  }
+
+  .heading {
+    padding-left: 100px;
+  }
+
+  .btn-sml {
+    height: 24px;
+    width: 80px;
+    line-height: 24px;
+    margin: 5px 5px;
+    padding: 0 0.5em;
+  }
+
+  .search-bar {
+    margin-top: 40px;
+  }
+}
+
+/*-----------------------------------------Desktop media-----------------------------------------*/
+
+@media (min-width: 1024px) {}
