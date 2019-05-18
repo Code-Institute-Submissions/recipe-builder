@@ -6,7 +6,7 @@ I have developed this project using the skills learnt to build a Flask Website, 
 
 ## UX
 
-The project needs to be a web applicaition where users can log in to a recipe builder where they can create, store, edit and delete their own recipes. They will have access to other users' recipes stored on the database. The user must be able to search by cuisine, allergens, ingredient or author of the recipe.
+The project needs to be a web applicaition where users can log into a recipe builder where they can create, store, edit and delete their own recipes. They will have access to other users' recipes stored on the database. The user must be able to search by cuisine, allergens, ingredient or author of the recipe.
 
 ## Features
 
@@ -59,7 +59,7 @@ I tested the applicaition manually as follows:
 5. Create Recipe page 
     1. Click on create recipe
     2. Add a test recipe and ensure that this recipe and submit.
-    3. I verify that the recipe can be viewed from the Home page, All Recipes page, searched for and the full recipe is loaded. 
+    3. I verified that the recipe can be viewed from the Home page, All Recipes page, searched for and the full recipe is loaded. 
     4. I also verified that the test recipe was saved in MongoDB.
 
 6. Search 
