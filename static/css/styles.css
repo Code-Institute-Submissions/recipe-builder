@@ -411,14 +411,14 @@ hr {
 @media (min-width: 768px) {
   /*--------------Buttons------------*/
   .btn {
-  font-size: 10px;
-}
+    font-size: 10px;
+  }
 
   .submit_btn {
     height: 28px;
     font-size: 12px;
   }
-  
+
   /*--------------Headings------------*/
   .page_heading {
     font-size: 40px;
@@ -436,16 +436,16 @@ hr {
     padding: 0 0.5em;
   }
 
-  .search-bar {
-    margin-top: 40px;
-  }
-
   /*---------------Navbar---------------*/
   nav .brand-logo {
     font-size: 30px;
   }
 
   /*--------------Search Bar---------------*/
+  .search-bar {
+    margin-top: 40px;
+  }
+
   .material-icons {
     font-size: 25px;
   }
@@ -459,21 +459,29 @@ hr {
 /*-----------------------------------------Desktop media-----------------------------------------*/
 
 @media (min-width: 1024px) {
-   /*--------------Buttons------------*/
-  
-  
-  /*--------------Headings------------*/
-  
+  /*--------------Buttons------------*/
+  .submit_btn {
+    height: 30px;
+    font-size: 15px;
+    line-height: 30px;
+  }
 
+  /*--------------Headings------------*/
+  .page_heading {
+    font-size: 50px;
+  }
+
+  .sub_heading {
+    font-size: 30px;
+  }
   /*---------------Navbar---------------*/
   nav .brand-logo {
-    font-size: 40px;
+    font-size: 50px;
     padding-left: 25px;
   }
 
-  /*--------------Search Bar---------------*/
-  
-
-  
-
+  /*---------------Recipe Cards---------------*/
+  .card .card-title {
+    font-size: 30px;
+  }
 }
