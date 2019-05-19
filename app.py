@@ -132,7 +132,8 @@ def update_recipe(recipe_id):
         'amount_serves':request.form.get('amount_serves'),
         'image_file': request.form.get('image_file'),
         'ingredients':request.form.get('ingredients'),
-        'method_description':request.form.get('method_description')
+        'method_description':request.form.get('method_description'),
+        'user':session['username']
     })
     return redirect(url_for('get_recipes'))
     

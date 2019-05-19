@@ -50,7 +50,7 @@ I tested the applicaition manually as follows:
     1. Enter a username that already exsists 
     2. Verify an error flashes up and they are asked to choose an alternative username. 
     3. Register an account successfully verify that the username and password is saved in MongoDB. The user's password is encoded.
-    4. I did not enter a username and password but the user was still created. Therefore I added a "minlength" and "required" to the input field. 
+    4. I did not enter a username and password but the user was still created. Therefore I added a "minlength" and "required" to the input field to fix this. 
 
 4. Login page
     1. Enter a correct username and an incorrect password combination and verify an error message appears. 
@@ -74,6 +74,7 @@ I tested the applicaition manually as follows:
     3. Change some data and resubmitting it.
     4. This then redirects the user to the home page.
     5. I then checked that the updated information was seen in that recipe.
+    6. I realised that once a recipe was updated the username was not copied to the database. Therefore I fixed the problem by adding user session to app.py.
 
 8. Delete Recipe page 
     1. Log in
