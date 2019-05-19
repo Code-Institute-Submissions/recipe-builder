@@ -3,12 +3,12 @@
     <h4>{{ recipe.recipe_name }}</h4>
 
     <div class="row">
-        <div class="col s4">
+        <div class="col s12 m4">
             <p>Views: {{ recipe.views }}</p>
             <img class="recipe_image" src="{{ recipe.image_file }}">
             <h5>{{ recipe.brief_description }}</h5>
         </div>
-        <div class="col s8">
+        <div class="col s12 m8">
             <h4>Ingredients</h4>
             <p>{{ recipe.ingredients }}</p>
             {% if session['username'] == recipe.user %}

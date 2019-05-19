@@ -27,7 +27,7 @@
     </div>
     <!--Catergories-->
     <div class="row">
-      <div class="input-field col s6">
+      <div class="input-field col s12 m6">
         <i class="material-icons prefix">poll</i>
         <select id="category_name" name="category_name">
           <option value="" disabled selected>Choose category</option>
@@ -44,7 +44,7 @@
 
       <!--Allergens-->
 
-      <div class="input-field col s6">
+      <div class="input-field col s12 m6">
         <i class="material-icons prefix">priority_high</i>
         <select multiple id="allergen_name" name="allergen_name">
           <option value="" disabled selected>Choose allergen</option>
@@ -61,13 +61,13 @@
     </div>
     <!--Preparation Time-->
     <div class="row">
-      <div class="input-field col s6">
+      <div class="input-field col s12 m6">
         <i class="material-icons prefix">schedule</i>
         <input id="prep_time" name="prep_time" type="text" class="timepicker" value="{{recipe.prep_time}}">
         <label for="icon_prefix">Preparation Time</label>
       </div>
       <!--Cooking Time-->
-      <div class="input-field col s6">
+      <div class="input-field col s12 m6">
         <i class="material-icons prefix">schedule</i>
         <input id="cook_time" name="cook_time" type="text" class="timepicker" value="{{recipe.cook_time}}">
         <label for="icon_prefix">Cooking Time</label>
@@ -99,13 +99,13 @@
       </div>
     </div>
     <h3>Add Your Ingredients</h3>
-    <h4>Enter one ingredient at a time</h4>
+    <h4>Enter one ingredient on each line</h4>
 
     <div class="row">
       <!--Ingredients-->
       <div class="input-field col s12">
         <textarea id="ingredients" name="ingredients" class="ingredients">{{recipe.ingredients}}</textarea>
-        <label for="textarea1">Ingredients (please add one ingredient on each new line)</label>
+        <label for="textarea1">Ingredients</label>
       </div>
     </div>
 

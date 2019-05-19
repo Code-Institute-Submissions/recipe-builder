@@ -1,6 +1,8 @@
-
-
 /*--------------Buttons------------*/
+
+.btn {
+  font-size: 10px;
+}
 
 .btn-sml {
   height: 24px;
@@ -12,7 +14,7 @@
 
 .submit_btn {
   height: 25px;
-  font-size: 7px;
+  font-size: 10px;
   line-height: 26px;
 }
 
@@ -51,26 +53,79 @@ h5 {
 }
 
 /*--------------Search Bar---------------*/
+
 .search-bar {
   margin-top: 0px;
 }
 
 .input-field input[type=search]+label {
-    left: 0px;
+  left: 0px;
 }
 
 .material-icons {
   font-size: 20px;
 }
 
-.input-field input[type=search] ~ .material-icons {
+.input-field input[type=search]~.material-icons {
   font-size: 20px;
 }
 
-input[type=search]:not(.browser-default):focus:not([readonly]) {
-  border-bottom: darkorange;
-  box-shadow: 0 1px 0 0 darkorange;
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input:not([type]):focus:not([readonly]),
+input[type=text]:not(.browser-default):focus:not([readonly]),
+input[type=password]:not(.browser-default):focus:not([readonly]),
+input[type=email]:not(.browser-default):focus:not([readonly]),
+input[type=url]:not(.browser-default):focus:not([readonly]),
+input[type=time]:not(.browser-default):focus:not([readonly]),
+input[type=date]:not(.browser-default):focus:not([readonly]),
+input[type=datetime]:not(.browser-default):focus:not([readonly]),
+input[type=datetime-local]:not(.browser-default):focus:not([readonly]),
+input[type=tel]:not(.browser-default):focus:not([readonly]),
+input[type=number]:not(.browser-default):focus:not([readonly]),
+input[type=search]:not(.browser-default):focus:not([readonly]),
+textarea.materialize-textarea:focus:not([readonly]) {
+  border-bottom: #f6bb36;
+  box-shadow: 0 1px 0 0 #f6bb36;
   padding-left: 25px;
+}
+
+input:not([type]):focus:not([readonly])+label,
+input[type=text]:not(.browser-default):focus:not([readonly])+label,
+input[type=password]:not(.browser-default):focus:not([readonly])+label,
+input[type=email]:not(.browser-default):focus:not([readonly])+label,
+input[type=url]:not(.browser-default):focus:not([readonly])+label,
+input[type=time]:not(.browser-default):focus:not([readonly])+label,
+input[type=date]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime]:not(.browser-default):focus:not([readonly])+label,
+input[type=datetime-local]:not(.browser-default):focus:not([readonly])+label,
+input[type=tel]:not(.browser-default):focus:not([readonly])+label,
+input[type=number]:not(.browser-default):focus:not([readonly])+label,
+input[type=search]:not(.browser-default):focus:not([readonly])+label,
+textarea.materialize-textarea:focus:not([readonly])+label {
+  color: #f6bb36;
+}
+
+.dropdown-content li>a,
+.dropdown-content li>span {
+  font-size: 15px;
+  color: #f6bb36;
+}
+
+.input-field .prefix.active {
+  color: #f6bb36;
+}
+
+[type="checkbox"]:checked+label:before {
+  border-right: 2px solid #f6bb36;
+  border-bottom: 2px solid #f6bb36;
+}
+
+.btn:focus,
+.btn-large:focus,
+.btn-floating:focus {
+  background-color: darkorange;
 }
 
 /*---------------Navbar---------------*/
@@ -92,15 +147,20 @@ nav {
 .jumbotron {
   background-image: url("../images/heart_food.jpeg");
   background-size: cover;
-  height: 55vh;
+  height: 45vh;
 }
 
+/*---------------Recipe Cards---------------*/
 .recipe_name {
   margin-top: 5px;
 }
 
 .card-title {
   color: #f6bb36;
+}
+
+.card .card-title {
+  font-size: 20px;
 }
 
 .card.small {
@@ -119,8 +179,10 @@ nav {
   width: 90%;
 }
 
+/*---------------Add Recipe---------------*/
+
 textarea {
-  column-count: 30;
+  height: 200px;
 }
 
 /* ---------------------------------Login-------------------*/
