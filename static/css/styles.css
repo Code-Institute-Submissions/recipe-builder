@@ -169,7 +169,7 @@ nav {
 }
 
 .card.small .card-image {
-  max-height: 50%;
+  height: 50%;
 }
 
 .card.small .card-image+.card-content {

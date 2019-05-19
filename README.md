@@ -50,6 +50,7 @@ I tested the applicaition manually as follows:
     1. Enter a username that already exsists 
     2. Verify an error flashes up and they are asked to choose an alternative username. 
     3. Register an account successfully verify that the username and password is saved in MongoDB. The user's password is encoded.
+    4. I did not enter a username and password but the user was still created. Therefore I added a "minlength" and "required" to the input field. 
 
 4. Login page
     1. Enter a correct username and an incorrect password combination and verify an error message appears. 
