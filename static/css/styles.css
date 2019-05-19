@@ -151,6 +151,7 @@ nav {
 }
 
 /*---------------Recipe Cards---------------*/
+
 .recipe_name {
   margin-top: 5px;
 }
@@ -408,12 +409,23 @@ hr {
 /*-----------------------------------------iPad media-----------------------------------------*/
 
 @media (min-width: 768px) {
-  nav .brand-logo {
-    padding-left: 60px;
+  /*--------------Buttons------------*/
+  .btn {
+  font-size: 10px;
+}
+
+  .submit_btn {
+    height: 28px;
+    font-size: 12px;
+  }
+  
+  /*--------------Headings------------*/
+  .page_heading {
+    font-size: 40px;
   }
 
-  .heading {
-    padding-left: 100px;
+  .sub_heading {
+    font-size: 25px;
   }
 
   .btn-sml {
@@ -427,8 +439,41 @@ hr {
   .search-bar {
     margin-top: 40px;
   }
+
+  /*---------------Navbar---------------*/
+  nav .brand-logo {
+    font-size: 30px;
+  }
+
+  /*--------------Search Bar---------------*/
+  .material-icons {
+    font-size: 25px;
+  }
+
+  .input-field input[type=search]~.material-icons {
+    font-size: 25px;
+  }
+
 }
 
 /*-----------------------------------------Desktop media-----------------------------------------*/
 
-@media (min-width: 1024px) {}
+@media (min-width: 1024px) {
+   /*--------------Buttons------------*/
+  
+  
+  /*--------------Headings------------*/
+  
+
+  /*---------------Navbar---------------*/
+  nav .brand-logo {
+    font-size: 40px;
+    padding-left: 25px;
+  }
+
+  /*--------------Search Bar---------------*/
+  
+
+  
+
+}
