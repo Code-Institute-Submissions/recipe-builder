@@ -60,7 +60,7 @@ def register():
             session['username'] = request.form['username']
             return redirect(url_for('index'))
         
-        flash('That username already exists!')
+        flash('That username already exists! Please choose another')
 
     return render_template('register.html')
 
