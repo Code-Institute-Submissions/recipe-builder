@@ -1,5 +1,4 @@
 from flask import Flask, render_template, redirect, request, url_for, session, flash
-from forms import RecipeSearchForm
 from flask_pymongo import PyMongo, DESCENDING
 from bson.objectid import ObjectId
 import re
