@@ -98,6 +98,8 @@ When performing the tests I came across a problem that my search was not returni
 * iOS
 * Chrome - I have come across a problem that the time picker does not open unless you right click. It does work over the other web browsers.
 
+11. I verfied my JavaScript on https://jshint.com and amended my code accordingly. I had just missed off a couple of ;
+
 ## Deployment
 
 The application was coded on Cloud9. I then committed the code GITHUB at https://github.com/sarahg177/recipe-builder
